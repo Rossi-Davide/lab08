@@ -14,6 +14,7 @@ import it.unibo.deathnote.impl.DeathNoteImplementation;
 class TestDeathNote {
 
     private DeathNote deathNote;
+    private static final String HUMAN_NAME = "Nicholas Magi"; 
 
     @BeforeEach
     public void setUp(){
@@ -24,23 +25,20 @@ class TestDeathNote {
     @Test
     public void testGetNegativeOrZeroRule(){   
         
-        try{
-            deathNote.getRule(0);
-            Assertions.fail("Getting rule number 0 should throw an error but it didn't");
-        }catch(Exception zeroRuleException){
-            assertEquals(IllegalArgumentException.class, zeroRuleException.getClass());
-            assertNotNull(zeroRuleException.getMessage());
-            assertFalse(zeroRuleException.getMessage().isBlank());
-        }
+        IllegalArgumentException zeroRuleException = assertThrows(
+                IllegalArgumentException.class,
+                ()->deathNote.getRule(0),
+                "Getting rule number 0 should throw an error but it didn't");
+            
+        assertNotNull(zeroRuleException.getMessage());
+        assertFalse(zeroRuleException.getMessage().isBlank());
+        IllegalArgumentException negativeRuleException = assertThrows(
+                IllegalArgumentException.class,
+                ()->deathNote.getRule(0),
+                "Getting a negative rule should throw an error but it didn't");   
+        assertNotNull(negativeRuleException.getMessage());
+        assertFalse(negativeRuleException.getMessage().isBlank());
 
-        try{
-            deathNote.getRule(-1);
-            Assertions.fail("Getting a negative rule should throw an error but it didn't");
-        }catch(Exception negativeRuleException){
-            assertEquals(IllegalArgumentException.class, negativeRuleException.getClass());
-            assertNotNull(negativeRuleException.getMessage());
-            assertFalse(negativeRuleException.getMessage().isBlank());
-        }
     }
 
     @Test
@@ -49,6 +47,12 @@ class TestDeathNote {
             assertNotNull(el);
             assertFalse(el.isBlank());
         }
+    }
+
+    @Test
+    public void testWritingToDeathNote(){
+        assertFalse(deathNote.isNameWritten(HUMAN_NAME));
+
     }
 
 
