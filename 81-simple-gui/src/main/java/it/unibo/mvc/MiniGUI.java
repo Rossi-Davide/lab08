@@ -47,11 +47,14 @@ public class MiniGUI {
         write.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                resultField.setText(Integer.toString(randomGenerator.nextInt()));
+                final int res = randomGenerator.nextInt();
+                System.out.println(res);
+                resultField.setText(Integer.toString(res));
             }
         });
 
     }
+
 
     private void display() {
         /*
