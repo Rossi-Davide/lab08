@@ -1,11 +1,10 @@
 package it.unibo.deathnote;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import it.unibo.deathnote.api.DeathNote;
@@ -15,6 +14,7 @@ class TestDeathNote {
 
     private DeathNote deathNote;
     private static final String HUMAN_NAME = "Nicholas Magi"; 
+    private static final String SECOND_HUMAN_NAME = "Davide Rossi";
 
     @BeforeEach
     public void setUp(){
@@ -52,7 +52,9 @@ class TestDeathNote {
     @Test
     public void testWritingToDeathNote(){
         assertFalse(deathNote.isNameWritten(HUMAN_NAME));
-
+        deathNote.writeName(HUMAN_NAME);
+        assertFalse(deathNote.isNameWritten(SECOND_HUMAN_NAME));
+        assertFalse(deathNote.isNameWritten(SECOND_HUMAN_NAME));
     }
 
 
