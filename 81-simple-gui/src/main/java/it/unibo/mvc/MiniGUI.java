@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,12 +31,14 @@ public class MiniGUI {
     public MiniGUI() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
-        final JPanel secondaryPanel = new JPanel();
+        final JPanel innerPanel = new JPanel();
+        innerPanel.setLayout(new BoxLayout(innerPanel,BoxLayout.X_AXIS));
         final JButton write = new JButton("Print a random number on standard output");
-        secondaryPanel.setLayout(new BoxLayout(secondaryPanel,BoxLayout.X_AXIS));
-        secondaryPanel.add(write);
-        canvas.add(secondaryPanel, BorderLayout.CENTER);
-        frame.setContentPane(secondaryPanel);
+        innerPanel.add(write);
+        final TextField resultField = new TextField("Result");
+        canvas.add(resultField, BorderLayout.NORTH);
+        canvas.add(innerPanel, BorderLayout.CENTER);
+        frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
          * Handlers
