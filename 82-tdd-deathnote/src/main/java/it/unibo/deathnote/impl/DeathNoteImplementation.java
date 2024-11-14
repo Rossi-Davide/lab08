@@ -20,32 +20,11 @@ public class DeathNoteImplementation implements DeathNote{
         private String causeOfDeath;
         private Date causeOfDeathTime;
         private String deathDetails;
-        private Date deathDetailsTime;
 
         public DeathRecord(){
             this.nameTime = new Date(System.currentTimeMillis());
             this.causeOfDeath = DEFAULT_CAUSE_OF_DEATH;
             this.deathDetails = "";
-        }
-
-        public Date getNameTime(){
-            return this.nameTime;
-        }
-
-        public String getCauseOfDeath(){
-            return this.causeOfDeath;
-        }
-
-        public Date getCauseOfDeathWritingTime(){
-            return this.causeOfDeathTime;
-        }
-
-        public String getDeathDetails(){
-            return this.deathDetails;
-        }
-
-        public Date getDeathDetailsWritingTime(){
-            return this.deathDetailsTime;
         }
 
         public void setCauseOfDeath(final String causeOfDeath){
@@ -55,7 +34,6 @@ public class DeathNoteImplementation implements DeathNote{
 
         public void setDeathDetails(final String deathDetails){
             this.deathDetails = deathDetails;
-            this.deathDetailsTime = new Date(System.currentTimeMillis());
         }
     }
 
