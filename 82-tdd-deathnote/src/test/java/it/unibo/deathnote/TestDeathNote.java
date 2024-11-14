@@ -30,14 +30,14 @@ class TestDeathNote {
     @Test
     public void testGetNegativeOrZeroRule(){   
         
-        IllegalArgumentException zeroRuleException = assertThrows(
+        final IllegalArgumentException zeroRuleException = assertThrows(
                 IllegalArgumentException.class,
                 ()->deathNote.getRule(0),
                 "Getting rule number 0 should throw an error but it didn't");
             
         assertNotNull(zeroRuleException.getMessage());
         assertFalse(zeroRuleException.getMessage().isBlank());
-        IllegalArgumentException negativeRuleException = assertThrows(
+        final IllegalArgumentException negativeRuleException = assertThrows(
                 IllegalArgumentException.class,
                 ()->deathNote.getRule(0),
                 "Getting a negative rule should throw an error but it didn't");   
