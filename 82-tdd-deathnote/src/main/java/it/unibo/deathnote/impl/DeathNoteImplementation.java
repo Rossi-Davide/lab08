@@ -96,7 +96,7 @@ public class DeathNoteImplementation implements DeathNote{
 
         final DeathRecord lastRecord = deathNote.lastEntry().getValue();
 
-        if((newCauseTime.getTime() - lastRecord.getNameTime().getTime()) <= TIME_DEATH_CAUSE){
+        if((newCauseTime.getTime() - lastRecord.nameTime.getTime()) <= TIME_DEATH_CAUSE){
             lastRecord.setCauseOfDeath(cause);
             return true;
         }
