@@ -1,10 +1,12 @@
 package it.unibo.deathnote;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import it.unibo.deathnote.api.DeathNote;
@@ -14,7 +16,9 @@ class TestDeathNote {
 
     private DeathNote deathNote;
     private static final String HUMAN_NAME = "Nicholas Magi"; 
-    private static final String SECOND_HUMAN_NAME = "Davide Rossi";
+    private static final String SECONDARY_HUMAN_NAME = "Davide Rossi";
+    private static final String CAUSE_OF_DEATH = "heart attack";
+    private static final String SECONDARY_CAUSE_OF_DEATH = "karting accident";
 
     @BeforeEach
     public void setUp(){
@@ -53,8 +57,30 @@ class TestDeathNote {
     public void testWritingNameToDeathNote(){
         assertFalse(deathNote.isNameWritten(HUMAN_NAME));
         deathNote.writeName(HUMAN_NAME);
-        assertFalse(deathNote.isNameWritten(SECOND_HUMAN_NAME));
+        assertFalse(deathNote.isNameWritten(SECONDARY_HUMAN_NAME));
         assertFalse(deathNote.isNameWritten(""));
     }
 
+    @Test 
+    public void testWritingCauseOfDeath(){
+        final IllegalStateException emptyDeathNoteException = assertThrows(
+            IllegalStateException.class, 
+            ()->deathNote.writeDeathCause(CAUSE_OF_DEATH),
+            "Writing a cause of death to an empty death note should throw an error but it didn't");
+        assertNotNull(emptyDeathNoteException.getMessage());
+        assertFalse(emptyDeathNoteException.getMessage().isBlank());
+        deathNote.writeName(HUMAN_NAME);
+        assertEquals(CAUSE_OF_DEATH,deathNote.getDeathCause(HUMAN_NAME));
+        deathNote.writeName(SECONDARY_HUMAN_NAME);
+        assertTrue(deathNote.writeDeathCause(SECONDARY_CAUSE_OF_DEATH));
+        assertEquals(SECONDARY_CAUSE_OF_DEATH,deathNote.getDeathCause(SECONDARY_HUMAN_NAME));
+        try{
+            Thread.sleep(100);
+            deathNote.writeDeathCause(CAUSE_OF_DEATH);
+            assertEquals(SECONDARY_CAUSE_OF_DEATH, deathNote.getDeathCause(SECONDARY_HUMAN_NAME));
+        }catch(InterruptedException threadSleepException){
+            System.err.println(threadSleepException.getMessage());
+            Assertions.fail("Test failed due to an error not pertinent to the death note");
+        }       
+    }
 }
