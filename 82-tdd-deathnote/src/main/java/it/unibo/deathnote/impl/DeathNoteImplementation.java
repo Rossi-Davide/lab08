@@ -14,14 +14,20 @@ public class DeathNoteImplementation implements DeathNote{
     private static class DeathRecord{
 
         private static final String DEFAULT_CAUSE_OF_DEATH = "heart attack";
+        private Date nameTime;
         private String causeOfDeath;
         private Date causeOfDeathTime;
         private String deathDetails;
         private Date deathDetailsTime;
 
         public DeathRecord(){
+            this.nameTime = new Date(System.currentTimeMillis());
             this.causeOfDeath = DEFAULT_CAUSE_OF_DEATH;
             this.deathDetails = "";
+        }
+
+        public Date getNameTime(){
+            return this.nameTime;
         }
 
         public String getCauseOfDeath(){
