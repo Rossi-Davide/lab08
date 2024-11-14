@@ -19,6 +19,7 @@ class TestDeathNote {
     private static final String SECONDARY_HUMAN_NAME = "Davide Rossi";
     private static final String CAUSE_OF_DEATH = "heart attack";
     private static final String SECONDARY_CAUSE_OF_DEATH = "karting accident";
+    private static final String DEATH_DETAILS = "ran for too long";
 
     @BeforeEach
     public void setUp(){
@@ -82,5 +83,28 @@ class TestDeathNote {
             System.err.println(threadSleepException.getMessage());
             Assertions.fail("Test failed due to an error not pertinent to the death note");
         }       
+    }
+
+    @Test
+    public void testWritingDeathDetails(){
+        final IllegalStateException emptyDeathNoteException = assertThrows(
+            IllegalStateException.class, 
+            ()->deathNote.writeDetails(DEATH_DETAILS),
+            "Writing death details to an empty death note should throw an error but it didn't");
+        assertNotNull(emptyDeathNoteException.getMessage());
+        assertFalse(emptyDeathNoteException.getMessage().isBlank());
+        deathNote.writeName(HUMAN_NAME);
+        assertTrue(deathNote.getDeathDetails(HUMAN_NAME).isEmpty());
+        assertTrue(deathNote.writeDetails(DEATH_DETAILS));
+        assertEquals(DEATH_DETAILS, deathNote.getDeathDetails(HUMAN_NAME));
+        deathNote.writeName(SECONDARY_HUMAN_NAME);
+        try{
+            Thread.sleep(6100);
+            assertFalse(deathNote.writeDetails(DEATH_DETAILS));
+            assertTrue(deathNote.getDeathDetails(SECONDARY_HUMAN_NAME).isEmpty());
+        }catch(InterruptedException threadSleepException){
+            System.err.println(threadSleepException.getMessage());
+            Assertions.fail("Test failed due to an error not pertinent to the death note");    
+        }
     }
 }
