@@ -9,6 +9,8 @@ import it.unibo.deathnote.api.DeathNote;
 
 public class DeathNoteImplementation implements DeathNote{
 
+    private static final long TIME_DEATH_CAUSE = 40;
+
     private final SequencedMap<String,DeathRecord> deathNote;
 
     private static class DeathRecord{
@@ -83,9 +85,22 @@ public class DeathNoteImplementation implements DeathNote{
     }
 
     @Override
-    public boolean writeDeathCause(String cause) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'writeDeathCause'");
+    public boolean writeDeathCause(final String cause) {
+        final Date newCauseTime = new Date(System.currentTimeMillis());
+        if(cause == null){
+            throw new IllegalStateException("The cause to write was null");
+        }
+        if(deathNote.isEmpty()){
+            throw new IllegalStateException("It is not possible to add a cause since the death note is empty");
+        }
+
+        final DeathRecord lastRecord = deathNote.lastEntry().getValue();
+
+        if((newCauseTime.getTime() - lastRecord.getNameTime().getTime()) <= TIME_DEATH_CAUSE){
+            lastRecord.setCauseOfDeath(cause);
+            return true;
+        }
+        return false;
     }
 
     @Override
