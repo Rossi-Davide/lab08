@@ -2,6 +2,7 @@ package it.unibo.deathnote.impl;
 
 
 import java.sql.Date;
+import java.util.LinkedHashSet;
 
 import it.unibo.deathnote.api.DeathNote;
 
@@ -11,20 +12,14 @@ public class DeathNoteImplementation implements DeathNote{
     private static class DeathRecord{
 
         private static final String DEFAULT_CAUSE_OF_DEATH = "heart attack";
-        private final String name;
         private String causeOfDeath;
         private Date causeOfDeathTime;
         private String deathDetails;
         private Date deathDetailsTime;
 
-        public DeathRecord(final String name){
-            this.name = name;
+        public DeathRecord(){
             this.causeOfDeath = DEFAULT_CAUSE_OF_DEATH;
             this.deathDetails = "";
-        }
-
-        public String getName(){
-            return this.name;
         }
 
         public String getCauseOfDeath(){
@@ -53,6 +48,10 @@ public class DeathNoteImplementation implements DeathNote{
             this.deathDetailsTime = new Date(System.currentTimeMillis());
         }
     }
+
+
+    
+
 
     @Override
     public String getRule(int ruleNumber) {
