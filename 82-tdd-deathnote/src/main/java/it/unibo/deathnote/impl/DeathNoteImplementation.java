@@ -110,9 +110,11 @@ public class DeathNoteImplementation implements DeathNote{
     }
 
     @Override
-    public String getDeathCause(String name) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDeathCause'");
+    public String getDeathCause(final String name) {
+        if(!deathNote.containsKey(name)){
+            throw new IllegalArgumentException("The requested name is not in the death note");
+        }
+        return deathNote.get(name).causeOfDeath;
     }
 
     @Override
