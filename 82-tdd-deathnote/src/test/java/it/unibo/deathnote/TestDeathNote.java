@@ -50,12 +50,11 @@ class TestDeathNote {
     }
 
     @Test
-    public void testWritingToDeathNote(){
+    public void testWritingNameToDeathNote(){
         assertFalse(deathNote.isNameWritten(HUMAN_NAME));
         deathNote.writeName(HUMAN_NAME);
         assertFalse(deathNote.isNameWritten(SECOND_HUMAN_NAME));
-        assertFalse(deathNote.isNameWritten(SECOND_HUMAN_NAME));
+        assertFalse(deathNote.isNameWritten(""));
     }
-
 
 }
