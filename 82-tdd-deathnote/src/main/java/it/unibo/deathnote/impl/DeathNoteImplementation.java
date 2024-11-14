@@ -2,12 +2,14 @@ package it.unibo.deathnote.impl;
 
 
 import java.sql.Date;
-import java.util.LinkedHashSet;
+import java.util.LinkedHashMap;
+import java.util.SequencedMap;
 
 import it.unibo.deathnote.api.DeathNote;
 
 public class DeathNoteImplementation implements DeathNote{
 
+    private final SequencedMap<String,DeathRecord> deathNote;
 
     private static class DeathRecord{
 
@@ -50,7 +52,9 @@ public class DeathNoteImplementation implements DeathNote{
     }
 
 
-    
+    public DeathNoteImplementation(){
+        deathNote = new LinkedHashMap<>();
+    }
 
 
     @Override
