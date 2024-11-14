@@ -64,9 +64,13 @@ public class DeathNoteImplementation implements DeathNote{
     }
 
     @Override
-    public void writeName(String name) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'writeName'");
+    public void writeName(final String name) {
+        if(name == null){
+            throw new NullPointerException("The given name is null");
+        }
+        if(!deathNote.containsKey(name)){
+            deathNote.put(name,new DeathRecord());
+        }
     }
 
     @Override
