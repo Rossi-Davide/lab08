@@ -77,7 +77,7 @@ class TestDeathNote {
         assertEquals(SECONDARY_CAUSE_OF_DEATH,deathNote.getDeathCause(SECONDARY_HUMAN_NAME));
         try{
             Thread.sleep(100);
-            deathNote.writeDeathCause(CAUSE_OF_DEATH);
+            assertFalse(deathNote.writeDeathCause(CAUSE_OF_DEATH));
             assertEquals(SECONDARY_CAUSE_OF_DEATH, deathNote.getDeathCause(SECONDARY_HUMAN_NAME));
         }catch(InterruptedException threadSleepException){
             System.err.println(threadSleepException.getMessage());
