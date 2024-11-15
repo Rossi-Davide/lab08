@@ -10,6 +10,7 @@ import it.unibo.deathnote.api.DeathNote;
 public class DeathNoteImplementation implements DeathNote{
 
     private static final long TIME_DEATH_CAUSE = 40;
+    private static final long TIME_DETAILS = 6040;
 
     private final SequencedMap<String,DeathRecord> deathNote;
 
@@ -37,11 +38,9 @@ public class DeathNoteImplementation implements DeathNote{
         }
     }
 
-
     public DeathNoteImplementation(){
         deathNote = new LinkedHashMap<>();
     }
-
 
     @Override
     public String getRule(final int ruleNumber) {
@@ -82,9 +81,22 @@ public class DeathNoteImplementation implements DeathNote{
     }
 
     @Override
-    public boolean writeDetails(String details) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'writeDetails'");
+    public boolean writeDetails(final String details) {
+        final Date newDetailsTime = new Date(System.currentTimeMillis());
+        if(details == null){
+            throw new IllegalStateException("The cause to write was null");
+        }
+        if(deathNote.isEmpty()){
+            throw new IllegalStateException("It is not possible to add a cause since the death note is empty");
+        }
+
+        final DeathRecord lastRecord = deathNote.lastEntry().getValue();
+
+        if((newDetailsTime.getTime() - lastRecord.nameTime.getTime()) <= TIME_DETAILS){
+            lastRecord.setDeathDetails(details);
+            return true;
+        }
+        return false;
     }
 
     @Override
