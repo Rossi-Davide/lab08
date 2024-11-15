@@ -9,7 +9,7 @@ import it.unibo.deathnote.api.DeathNote;
 
 public class DeathNoteImplementation implements DeathNote{
 
-    private static final long TIME_DEATH_CAUSE = 40;
+    private static final long TIME_CAUSE = 40;
     private static final long TIME_DETAILS = 6040;
 
     private final SequencedMap<String,DeathRecord> deathNote;
@@ -73,7 +73,7 @@ public class DeathNoteImplementation implements DeathNote{
 
         final DeathRecord lastRecord = deathNote.lastEntry().getValue();
 
-        if((newCauseTime.getTime() - lastRecord.nameTime.getTime()) <= TIME_DEATH_CAUSE){
+        if((newCauseTime.getTime() - lastRecord.nameTime.getTime()) <= TIME_CAUSE){
             lastRecord.setCauseOfDeath(cause);
             return true;
         }
