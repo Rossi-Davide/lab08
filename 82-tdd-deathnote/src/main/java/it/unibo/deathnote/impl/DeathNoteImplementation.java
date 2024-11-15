@@ -87,7 +87,7 @@ public class DeathNoteImplementation implements DeathNote{
             throw new IllegalStateException("The cause to write was null");
         }
         if(deathNote.isEmpty()){
-            throw new IllegalStateException("It is not possible to add a cause since the death note is empty");
+            throw new IllegalStateException("It is not possible to add details since the death note is empty");
         }
 
         final DeathRecord lastRecord = deathNote.lastEntry().getValue();
@@ -108,9 +108,11 @@ public class DeathNoteImplementation implements DeathNote{
     }
 
     @Override
-    public String getDeathDetails(String name) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDeathDetails'");
+    public String getDeathDetails(final String name) {
+        if(!deathNote.containsKey(name)){
+            throw new IllegalArgumentException("The requested name is not in the death note");
+        }
+        return deathNote.get(name).deathDetails;
     }
 
     @Override
