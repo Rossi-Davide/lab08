@@ -40,7 +40,7 @@ public final class DrawNumberControllerImpl implements DrawNumberController {
     public void newAttempt(final int n) {
         final DrawResult res = model.attempt(n);
         for (DrawNumberView view : views) {
-            Objects.requireNonNull(view, "There is no view attached!").result(res);   
+           view.result(res);   
         }
     }
 
