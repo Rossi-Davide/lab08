@@ -22,6 +22,4 @@ public class DrawNumberConsoleView implements DrawNumberView{
     public void result(final DrawResult res) {
         System.out.println(res.toString());
     }
-    
-
 }
