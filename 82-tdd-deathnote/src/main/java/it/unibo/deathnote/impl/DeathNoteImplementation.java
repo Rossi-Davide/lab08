@@ -14,33 +14,6 @@ public class DeathNoteImplementation implements DeathNote{
 
     private final SequencedMap<String,DeathRecord> deathNote;
 
-    private static class DeathRecord{
-
-        private static final String DEFAULT_CAUSE_OF_DEATH = "heart attack";
-        private Date nameTime;
-        private String causeOfDeath;
-        private Date causeOfDeathTime;
-        private String deathDetails;
-
-        public DeathRecord(){
-            
-            final long currentTimeMillis = System.currentTimeMillis(); 
-            this.nameTime = new Date(currentTimeMillis);
-            this.causeOfDeath = DEFAULT_CAUSE_OF_DEATH;
-            this.deathDetails = "";
-            this.causeOfDeathTime = new Date(currentTimeMillis);
-        }
-
-        public void setCauseOfDeath(final String causeOfDeath){
-            this.causeOfDeath = causeOfDeath;
-            this.causeOfDeathTime = new Date(System.currentTimeMillis());
-        }
-
-        public void setDeathDetails(final String deathDetails){
-            this.deathDetails = deathDetails;
-        }
-    }
-
     public DeathNoteImplementation(){
         deathNote = new LinkedHashMap<>();
     }
@@ -123,4 +96,30 @@ public class DeathNoteImplementation implements DeathNote{
         return deathNote.containsKey(name);
     }
 
+    private static class DeathRecord{
+
+        private static final String DEFAULT_CAUSE_OF_DEATH = "heart attack";
+        private Date nameTime;
+        private String causeOfDeath;
+        private Date causeOfDeathTime;
+        private String deathDetails;
+
+        public DeathRecord(){
+            
+            final long currentTimeMillis = System.currentTimeMillis(); 
+            this.nameTime = new Date(currentTimeMillis);
+            this.causeOfDeath = DEFAULT_CAUSE_OF_DEATH;
+            this.deathDetails = "";
+            this.causeOfDeathTime = new Date(currentTimeMillis);
+        }
+
+        public void setCauseOfDeath(final String causeOfDeath){
+            this.causeOfDeath = causeOfDeath;
+            this.causeOfDeathTime = new Date(System.currentTimeMillis());
+        }
+
+        public void setDeathDetails(final String deathDetails){
+            this.deathDetails = deathDetails;
+        }
+    }
 }
