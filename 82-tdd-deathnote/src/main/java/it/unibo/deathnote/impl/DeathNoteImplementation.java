@@ -23,9 +23,12 @@ public class DeathNoteImplementation implements DeathNote{
         private String deathDetails;
 
         public DeathRecord(){
-            this.nameTime = new Date(System.currentTimeMillis());
+            
+            final long currentTimeMillis = System.currentTimeMillis(); 
+            this.nameTime = new Date(currentTimeMillis);
             this.causeOfDeath = DEFAULT_CAUSE_OF_DEATH;
             this.deathDetails = "";
+            this.causeOfDeathTime = new Date(currentTimeMillis);
         }
 
         public void setCauseOfDeath(final String causeOfDeath){
@@ -92,7 +95,7 @@ public class DeathNoteImplementation implements DeathNote{
 
         final DeathRecord lastRecord = deathNote.lastEntry().getValue();
 
-        if((newDetailsTime.getTime() - lastRecord.nameTime.getTime()) <= TIME_DETAILS){
+        if((newDetailsTime.getTime() - lastRecord.causeOfDeathTime.getTime()) <= TIME_DETAILS){
             lastRecord.setDeathDetails(details);
             return true;
         }
