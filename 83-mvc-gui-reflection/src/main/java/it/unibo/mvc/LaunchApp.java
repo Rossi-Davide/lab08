@@ -7,15 +7,13 @@ import it.unibo.mvc.api.DrawNumberController;
 import it.unibo.mvc.api.DrawNumberView;
 import it.unibo.mvc.controller.DrawNumberControllerImpl;
 import it.unibo.mvc.model.DrawNumberImpl;
-import it.unibo.mvc.view.DrawNumberConsoleView;
-import it.unibo.mvc.view.DrawNumberSwingView;
 
 /**
  * Application entry-point.
  */
 public final class LaunchApp {
 
-    private static final int NVIEWS = 3;
+    private static final int N_VIEWS = 3;
 
     private LaunchApp() { }
 
@@ -38,7 +36,7 @@ public final class LaunchApp {
         final Class<?> consoleViewClass = Class.forName("it.unibo.mvc.view.DrawNumberConsoleView");
         final Constructor<?> swingViewConstructor = swingViewClass.getConstructor();
         final Constructor<?> consoleViewConstructor = consoleViewClass.getConstructor();
-        for(int i = 0; i < NVIEWS; i++){
+        for(int i = 0; i < N_VIEWS; i++){
             app.addView((DrawNumberView)swingViewConstructor.newInstance());
             app.addView((DrawNumberView)consoleViewConstructor.newInstance());
         }
